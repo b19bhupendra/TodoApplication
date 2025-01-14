@@ -2,6 +2,7 @@ package com.app.todoapp.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.todoapp.models.Task;
@@ -10,7 +11,7 @@ import com.app.todoapp.repository.ITaskRepository;
 @Service
 public class TaskServiceImple implements ITaskService {
 	
-	
+	@Autowired
 	private ITaskRepository taskRepository;
 	
    @Override
