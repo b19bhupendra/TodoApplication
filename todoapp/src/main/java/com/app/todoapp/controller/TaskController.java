@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -72,6 +73,26 @@ public class TaskController {
 		taskService.toggleTask(id);
 		return "redirect:/getTasks";
 	}
+	
+	/*
+	 * Method : Update query
+	 */
+	@PostMapping("/{id}/update")
+	public String updateTask(@PathVariable Long id, @RequestParam String title) {
+	    taskService.updateTask(id, title);
+	    return "redirect:/getTasks";
+	}
+
+
+	@GetMapping("/{id}/edit")
+	public String editTask(@PathVariable Long id, Model model) {
+	    Task task = taskService.getTaskById(id);
+	    List<Task> tasks = taskService.getAllTasks();
+	    model.addAttribute("task", task); // Task being edited
+	    model.addAttribute("tasks", tasks);    // Task list
+	    return "tasks"; // Return to the same view
+	}
+
 }
 
 

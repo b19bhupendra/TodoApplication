@@ -54,4 +54,18 @@ public class TaskServiceImple implements ITaskService {
 		task.setCompleted(!task.isCompleted());
 		taskRepository.save(task);
 	}
+
+	@Override
+	public void updateTask(Long id, String title) {
+	    Task task = taskRepository.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid Task id: " + id));
+	    task.setTitle(title);
+	    taskRepository.save(task);
+	}
+
+	@Override
+	public Task getTaskById(Long id) {
+	    return taskRepository.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid Task id: " + id));
+	}
 }
